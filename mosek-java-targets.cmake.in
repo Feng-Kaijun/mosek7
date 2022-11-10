@@ -1,0 +1,7 @@
+@PACKAGE_INIT@
+
+if(NOT TARGET mosekjava)
+  add_custom_target(mosekjava)
+  set_target_properties(mosekjava PROPERTIES
+    JAR_FILE "@PACKAGE_MOSEK_JAVA_DIR@/@MOSEK_JAR@")
+endif()

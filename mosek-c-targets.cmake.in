@@ -1,0 +1,17 @@
+@PACKAGE_INIT@
+
+if(NOT TARGET Threads::Threads)
+  message(FATAL_ERROR
+    "Could NOT find the target Threads::Threads referenced by target mosek"
+  )
+endif()
+
+if(NOT TARGET mosek)
+  add_library(mosek SHARED IMPORTED)
+  set_target_properties(mosek PROPERTIES
+    INTERFACE_LINK_LIBRARIES
+      "@PACKAGE_MOSEK_LIBRARY_DIR@/@IOMP5_LIBRARY_FILE@;@LIBM_LIBRARY@;Threads::Threads"
+    IMPORTED_LOCATION "@PACKAGE_MOSEK_LIBRARY_DIR@/@MOSEK_LIBRARY_FILE@"
+    INTERFACE_INCLUDE_DIRECTORIES "@PACKAGE_MOSEK_INCLUDE_DIR@"
+  )
+endif()
